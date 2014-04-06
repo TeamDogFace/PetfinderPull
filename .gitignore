@@ -1,0 +1,6 @@
+# We will be cloning the Petfinder repo gem for Vagrant
+/Petfinder
+
+# Ignore vagrant directory
+/.vagrant
+
