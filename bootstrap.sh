@@ -16,9 +16,9 @@ echo Installing bundler gem
 gem install bundler
 echo Installing rake gem
 gem install rake
-echo Cloning Petfinder gem
-git clone https://github.com/TeamDogFace/Petfinder
-cd Petfinder
-bundle install
-rake install petfinder.gemspec
+#echo Cloning Petfinder gem
+#git clone https://github.com/TeamDogFace/Petfinder
+#cd Petfinder
+#bundle install
+#rake install petfinder.gemspec
 
