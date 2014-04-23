@@ -4,3 +4,5 @@
 # Ignore vagrant directory
 /.vagrant
 
+# Ignore config.yml since it holds secret information
+config.yml

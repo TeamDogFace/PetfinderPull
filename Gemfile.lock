@@ -1,6 +1,7 @@
 GIT
-  remote: git://github.com/TeamDogFace/Petfinder.git
-  revision: 7657a6ec11fb5b92a52d8fa26cdac714e05b07de
+  remote: https://github.com/TeamDogFace/Petfinder
+  revision: 09abbc36270f084ca55fe12561391294636571d8
+  ref: 09abbc36270f084ca55fe12561391294636571d8
   specs:
     petfinder (0.0.1)
       httparty
