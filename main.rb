@@ -37,7 +37,7 @@ puts "Starting at zip code: #{start_zip}"
 
 #(start_zip.to_i..start_zip.to_i+999).each do |zip|
   zip = zip.to_s.rjust(5, '0')
-  pets = client.find_pet(zip, {animal: 'dog', count: 2000})
+  pets = client.find_pet(zip, {animal: 'dog', count: '100'})
   puts pets.count
 #end
 
