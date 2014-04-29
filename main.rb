@@ -40,7 +40,7 @@ def insert_into_database(pets, con)
         # {pets[number].description}#{pets[number].last_update} {pets[number].description}#{pets[number].last_update}
         currentPhotoNumber = 0
         Net::HTTP.start("photos.petfinder.com") do |http|
-            currentPhotoNumber+=1
+            
             
             begin
                 #   @pet = client.get_random_pet({output: 'full', animal: 'dog'})
@@ -49,11 +49,12 @@ def insert_into_database(pets, con)
                 
                 pets[number].photos.each do |p|
                     #[0]['__content__'] #.slice!("http://photos.petfinder.com")
-                    
+                    currentPhotoNumber+=1
                     #      puts url[27..-1]
                     filename = "pf_#{pets[number].id}_#{currentPhotoNumber}.jpg"
                     response = http.get(p.large[27..-1])
                     open("#{filename}", "wb") do |file|
+                       
                         file.write(response.body)
                         path = Dir.pwd
                         
@@ -100,25 +101,30 @@ end
     # Get token from Petfinder
     #client.get_token
     
-    start_zip = read_last_zip_code
+    start_zip = read_last_zip_code.to_i
     puts "Starting at zip code: #{start_zip}"
     
     requests = 0
     offset = 0
     while requests < MAX_REQUESTS
         #CATCH 502 error message for offset
-        
+        begin
         #end
         #(start_zip.to_i..start_zip.to_i+MAX_REQUESTS).each do |zip|
         # zip = zip.to_s.rjust(5, '0')
         # Petfinder count is restricted to 100 records because of a bug...
-        pets = client.find_pets('dog', 19350, {count: '100',lastOffset: offset})#, {animal: 'dog', count: '100'})
+        pets = client.find_pets('dog', start_zip, {count: '100',lastOffset: offset})#, {animal: 'dog', count: '100'})
         insert_into_database(pets, con)
         puts pets.count
         offset += pets.count
+        requests+=1
+        
+        rescue Exception => exception502
+        offset = 0
+        start_zip +=1
+        end
         
         
-          requests+=1
-        
+
     
 end
