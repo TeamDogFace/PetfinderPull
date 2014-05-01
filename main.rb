@@ -40,8 +40,6 @@ def insert_into_database(pets, con)
         # {pets[number].description}#{pets[number].last_update} {pets[number].description}#{pets[number].last_update}
         currentPhotoNumber = 0
         Net::HTTP.start("photos.petfinder.com") do |http|
-            
-            
             begin
                 #   @pet = client.get_random_pet({output: 'full', animal: 'dog'})
                 
@@ -58,7 +56,6 @@ def insert_into_database(pets, con)
                         file.write(response.body)
                         path = Dir.pwd
                         
-                        
                         #!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                         # Detection needs to be implemented on the photos downloaded from petfinder before they are added to the database
                         #!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,10 +69,6 @@ def insert_into_database(pets, con)
                         end
                         puts dogidvalue
                         con.query("INSERT INTO photos VALUES(0,'#{filename}','#{path}','jpg','#{dogidvalue}')")
-                    
-                    
-                    
-                    
                     end
                     
                     puts "Image #{currentPhotoNumber} downloaded"
@@ -118,13 +111,12 @@ end
         puts pets.count
         offset += pets.count
         requests+=1
-        
         rescue Exception => exception502
         offset = 0
-        start_zip +=1
+        if zip == 99999
+            zip = 0
         end
-        
-        
-
-    
+        start_zip +=1
+        # update zip code text
+        end
 end
